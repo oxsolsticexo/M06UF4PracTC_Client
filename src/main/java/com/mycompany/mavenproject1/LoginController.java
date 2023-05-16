@@ -15,6 +15,6 @@ public class LoginController {
 
     @FXML
     private void cambiarPantallaMain() throws IOException {
-        App.setRoot("pantallaMaind");
+        App.setRoot("pantallaMainController");
     }
 }
