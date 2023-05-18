@@ -1,4 +1,4 @@
-
+//
 //import com.github.javafaker.Faker;
 //import javax.naming.NamingException;
 //import common.Article;
