@@ -5,9 +5,9 @@
     </authentication-rules>
     <authentication-configurations>
       <configuration name="default">
-          <!--  credencial para el servicio remoto <set-user-name name="ejbremote"/> -->
+          <set-user-name name="ejbremote"/>
         <credentials>
-          <!-- credencial para el servicio remoto <clear-password password="R3m0teEjb"/> -->
+          <clear-password password="R3m0teEjb"/>
         </credentials>
       </configuration>
     </authentication-configurations>
@@ -15,7 +15,7 @@
   <jboss-ejb-client xmlns="urn:jboss:wildfly-client-ejb:3.0">
       <connections>
           <connection uri="remote+http://localhost:8080" />
-          <!-- conexión a los componentes ejb <connection uri="remote+http://13.53.140.190:8080" /> --> <!-- Adreça del servidor on es publiquen els EJB -->
+          <!-- <connection uri="remote+http://localhost:8080" /> --> <!-- Adreça del servidor on es publiquen els EJB -->
       </connections>
 </jboss-ejb-client>
 </configuration>
