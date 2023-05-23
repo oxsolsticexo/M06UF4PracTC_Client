@@ -61,7 +61,6 @@ public class CreateGame implements Initializable {
 
         //Dificultades
         inicializarDificultades();
-        inicializarNumeroJugadores();
         inicializarImagenes();
         
 
@@ -71,12 +70,6 @@ public class CreateGame implements Initializable {
     void inicializarDificultades() {
         for (dificultades dificultad : dificultades.values()) {
             dificultChoiceBox.getItems().add(dificultad.toString());
-        }
-    }
-
-    void inicializarNumeroJugadores() {
-        for (int players=1;players<=maxJugadores;players++) {
-            numberOfPlayersChoiceBox.getItems().add(Integer.toString(players));
         }
     }
 
