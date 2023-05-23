@@ -3,6 +3,7 @@ package com.mycompany.mavenproject1.Presentacion;
 
 
 import Logica.Logica;
+import com.mycompany.mavenproject1.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,6 +18,8 @@ import javafx.scene.image.ImageView;
 
 public class CreateGame implements Initializable {
 
+    WindowsManager manager = new WindowsManager();
+    
     public enum dificultades {
         Fácil, Difícil, Normal
     };
@@ -87,6 +90,7 @@ public class CreateGame implements Initializable {
         
         //Implementar funcion para cambiar de ventana
         System.out.println("Nuevo juego");
+        manager.startGame(createButton);
 
     }
     
@@ -94,8 +98,8 @@ public class CreateGame implements Initializable {
     void cancelButton(ActionEvent event) {
         
         //Implementar funcion para cambiar de ventana
+        manager.mainMenu(cancelButton);
         
-        System.out.println("Retroceder");
 
     }
     
