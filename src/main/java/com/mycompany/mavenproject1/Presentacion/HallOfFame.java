@@ -42,7 +42,7 @@ public class HallOfFame implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         
         createTable();
-        insertTableContent();
+        //insertTableContent();
         
         
         
