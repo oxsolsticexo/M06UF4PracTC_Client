@@ -10,10 +10,10 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.LoginController">
     <children>
         <Label layoutX="357.0" layoutY="123.0" text="Usuario:" />
-        <TextField fx:id="userTextField" layoutX="357.0" layoutY="158.0" prefWidth="200.0" />
+        <TextField fx:id="usernameField" layoutX="357.0" layoutY="158.0" prefWidth="200.0" />
         <Label layoutX="356.0" layoutY="192.0" text="Correo electrónico:" />
-        <TextField fx:id="mailTextField" layoutX="356.0" layoutY="220.0" prefWidth="200.0" />
-        <Button layoutX="114.0" layoutY="207.0" mnemonicParsing="false" text="Iniciar sesión" />
+        <TextField fx:id="emailField" layoutX="356.0" layoutY="220.0" prefWidth="200.0" />
+        <Button layoutX="114.0" layoutY="207.0" mnemonicParsing="false" onAction="#cambiarPantallaMain" text="Iniciar sesión" />
       <Line endX="-100.0" endY="309.0" layoutX="400.0" layoutY="100.0" startX="-100.0" startY="-100.0" />
       <Label layoutX="56.0" layoutY="123.0" text="Email:" />
       <Label layoutX="140.0" layoutY="59.0" prefHeight="36.0" prefWidth="50.0" text="Login">
@@ -26,7 +26,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="mailLoginTextField" layoutX="56.0" layoutY="158.0" prefWidth="200.0" />
-      <Button layoutX="414.0" layoutY="273.0" mnemonicParsing="false" onAction="#registroToPantallaMain" text="Registrar" />
+      <TextField fx:id="usernameField1" layoutX="56.0" layoutY="158.0" prefWidth="200.0" />
+      <Button layoutX="414.0" layoutY="273.0" mnemonicParsing="false" onAction="#cambiarPantallaMain" text="Registrar" />
     </children>
 </AnchorPane>
