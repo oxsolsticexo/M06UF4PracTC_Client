@@ -3,6 +3,7 @@ package com.mycompany.mavenproject1.Presentacion;
 
 
 import Logica.Logica;
+import Logica.LogicaPartida;
 import com.mycompany.mavenproject1.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,13 +19,13 @@ import javafx.scene.image.ImageView;
 
 public class CreateGame implements Initializable {
 
-    WindowsManager manager = new WindowsManager();
+    
     
     public enum dificultades {
         Fácil, Difícil, Normal
     };
 
-    public static final int maxJugadores = 4;
+    
 
     @FXML
     private Button cancelButton;
@@ -55,6 +56,12 @@ public class CreateGame implements Initializable {
     
     //Global variables
     Logica logicGame = new Logica();
+    
+    //Gestor de ventanas
+    WindowsManager manager = new WindowsManager();
+    
+    //Logica Partida
+    LogicaPartida logicaPartida = new LogicaPartida();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
