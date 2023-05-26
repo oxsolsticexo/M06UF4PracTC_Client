@@ -4,8 +4,9 @@
  */
 package com.mycompany.mavenproject1;
 
-import common.IJugador;
+import common.ISessionManagerEJB;
 import common.Lookups;
+import common.Token;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javax.naming.NamingException;
+import main.SessionManagerEJB;
 
 /**
  *
@@ -20,41 +22,40 @@ import javax.naming.NamingException;
  */
 public class LoginController {
 
-    static IJugador jugador;
+    private static ISessionManagerEJB sm;
+
+    Token token = null;
 
     @FXML
-    private TextField mailTextField, userTextField, mailLoginTextField;
+    private TextField userLogin, UserRegistro, emailRegistro;
 
     @FXML
     private void registroToPantallaMain() throws IOException, NamingException {
-        jugador = Lookups.jugadorEJBRemoteLookup();
-        boolean bol = false;
+        sm = Lookups.sessionManagerEJBRemoteLookup();
 
-        String usuario = userTextField.getText();
-        String correo = mailTextField.getText();
-        if (usuario != null && mailTextField != null) {
-
-            bol = jugador.registrarJugador(usuario, correo);
-        }
-
-        System.out.println("el usuario y el correo son : " + usuario + correo);
-        if (bol) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("pantallaMain.fxml"));
-            Parent root = loader.load();
-            PantallaMainController controller = loader.getController();
-
-            // Realiza cualquier configuraciÃ³n adicional en el controlador PantallaMainController si es necesario
-            // ObtÃ©n la escena actual y cÃ¡mbiala por la nueva escena con la pantalla "PantallaMainController"
-            Scene scene = userTextField.getScene();
-            scene.setRoot(root);
-
-//        App.setRoot("pantallaMain.fxml");
-        }
+//        String usuario = UserRegistro.getText();
+//        String correo = emailRegistro.getText();
+//        String usuario = "hola";
+//        String correo = "hola@hola.com";
+//        if (usuario != null && emailRegistro != null) {
+//            sm.registrarJugador(usuario, correo);
+//        }
+            sm.registrarJugador("hola", "hola@hola.com");
 
     }
 
-//    @FXML
-//    private void loginToPantallaMain() throws IOException, NamingException {
+//        System.out.println("el usuario y el correo son : " + usuario + correo);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("pantallaMain.fxml"));
+//        Parent root = loader.load();
+//        PantallaMainController controller = loader.getController();
+//
+//        // Realiza cualquier configuraciÃ³n adicional en el controlador PantallaMainController si es necesario
+//        // ObtÃ©n la escena actual y cÃ¡mbiala por la nueva escena con la pantalla "PantallaMainController"
+//        Scene scene = userTextField.getScene();
+//        scene.setRoot(root);
+//        App.setRoot("pantallaMain.fxml");
+    @FXML
+    private void loginToPantallaMain() throws IOException, NamingException {
 //        jugador = Lookups.jugadorEJBRemoteLookup();
 //
 //        String mailLogin = mailLoginTextField.getText();
@@ -76,4 +77,5 @@ public class LoginController {
 //
 ////        App.setRoot("pantallaMain.fxml");
 //    }
+    }
 }
