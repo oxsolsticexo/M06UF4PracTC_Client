@@ -90,7 +90,8 @@ public class CreateGame implements Initializable {
         
         //Implementar funcion para cambiar de ventana
         System.out.println("Nuevo juego");
-        manager.startGame(createButton);
+        logicaPartida.crearPartida(newGameInputText.getText(),"Juan", dificultChoiceBox.getValue());
+        //manager.startGame(createButton);
 
     }
     
