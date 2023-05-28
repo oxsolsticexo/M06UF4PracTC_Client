@@ -1,11 +1,9 @@
-package com.mycompany.mavenproject1.Presentacion;
-
-
+package Presentacion;
 
 import Logica.Logica;
+import Logica.LogicaPartida;
 
-import com.mycompany.mavenproject1.WindowsManager;
-
+import Main.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,13 +19,9 @@ import javax.naming.NamingException;
 
 public class CreateGame implements Initializable {
 
-    
-    
     public enum dificultades {
         Fácil, Difícil, Normal
     };
-
-    
 
     @FXML
     private Button cancelButton;
@@ -55,13 +49,13 @@ public class CreateGame implements Initializable {
 
     @FXML
     private Label selectDificultLabel;
-    
+
     //Global variables
     Logica logicGame = new Logica();
-    
+
     //Gestor de ventanas
     WindowsManager manager = new WindowsManager();
-    
+
     //Logica Partida
     LogicaPartida logicaPartida = new LogicaPartida();
 
@@ -71,9 +65,7 @@ public class CreateGame implements Initializable {
         //Dificultades
         inicializarDificultades();
         inicializarImagenes();
-        
 
-        
     }
 
     void inicializarDificultades() {
@@ -86,26 +78,23 @@ public class CreateGame implements Initializable {
         Image logo = new Image("/images/Trivial.png");
         imageLogo.setImage(logo);
     }
-    
+
     @FXML
     void startGame(ActionEvent event) throws NamingException {
-        
-        //Implementar funcion para cambiar de ventana
 
+        //Implementar funcion para cambiar de ventana
         System.out.println("Nuevo juego");
-        logicaPartida.crearPartida(newGameInputText.getText(),"Juan", dificultChoiceBox.getValue());
+        logicaPartida.crearPartida(newGameInputText.getText(), "Juan", dificultChoiceBox.getValue());
         //manager.startGame(createButton);
 
     }
-    
+
     @FXML
     void cancelButton(ActionEvent event) {
-        
+
         //Implementar funcion para cambiar de ventana
         manager.mainMenu(cancelButton);
-        
 
     }
-    
 
 }

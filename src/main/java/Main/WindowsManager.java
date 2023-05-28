@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.mavenproject1;
+package Main;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -45,13 +45,29 @@ public class WindowsManager {
 
     }
 
-    public void createNewGame() {
+    public void disconnect(Button discon) {
         try {
+            Stage oldWindow = (Stage) discon.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 600, 400));
+            oldWindow.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    public void createNewGame(Button createGame) {
+        try {
+            Stage oldWindow = (Stage) createGame.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 600, 400));
+            oldWindow.close();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
