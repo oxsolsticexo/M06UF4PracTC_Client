@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.Presentacion.CreateGame">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentacion.CreateGame">
    <children>
       <Label fx:id="newGameLabel" layoutX="42.0" layoutY="25.0" text="Nom de la partida:" />
       <TextField fx:id="newGameInputText" layoutX="42.0" layoutY="57.0" prefHeight="25.0" prefWidth="520.0" promptText="Nom de la partida" />

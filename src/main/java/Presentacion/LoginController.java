@@ -88,16 +88,20 @@
 ////            controller.setToken(token);
 //        }
 //    }
-package com.mycompany.mavenproject1;
+package Presentacion;
 
-import common.ISessionManager;
-import common.Lookups;
-import common.Token;
+import Entities.Lookups;
+import Entities.Token;
+import Logica.Interfaces.ISessionManager;
+import Main.WindowsManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javax.naming.NamingException;
+
+
+
 
 public class LoginController {
 
