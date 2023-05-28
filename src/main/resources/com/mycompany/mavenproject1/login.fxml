@@ -13,7 +13,7 @@
         <TextField fx:id="userRegistro" layoutX="357.0" layoutY="158.0" prefWidth="200.0" />
         <Label layoutX="356.0" layoutY="192.0" text="Correo electrónico:" />
         <TextField fx:id="emailRegistro" layoutX="356.0" layoutY="220.0" prefWidth="200.0" />
-        <Button layoutX="114.0" layoutY="207.0" mnemonicParsing="false" onAction="#registroToPantallaMain" text="Iniciar sesión" />
+        <Button fx:id="botonLogin" layoutX="114.0" layoutY="207.0" mnemonicParsing="false" onAction="#loginToPantallaMain" text="Iniciar sesión" />
       <Line endX="-100.0" endY="309.0" layoutX="400.0" layoutY="100.0" startX="-100.0" startY="-100.0" />
       <Label layoutX="56.0" layoutY="123.0" text="Email:" />
       <Label layoutX="140.0" layoutY="59.0" prefHeight="36.0" prefWidth="50.0" text="Login">
@@ -27,6 +27,6 @@
          </font>
       </Label>
       <TextField fx:id="userLogin" layoutX="56.0" layoutY="158.0" prefWidth="200.0" />
-      <Button layoutX="414.0" layoutY="273.0" mnemonicParsing="false" onAction="#registroToPantallaMain" text="Registrar" />
+      <Button fx:id="botonRegistrar" layoutX="414.0" layoutY="273.0" mnemonicParsing="false" onAction="#registroToPantallaMain" text="Registrar" />
     </children>
 </AnchorPane>
