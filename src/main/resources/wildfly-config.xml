@@ -6,11 +6,11 @@
         <authentication-configurations>
             <configuration name="default">
                 <!--<set-user-name name="ejbremote"/>-->
-                <set-user-name name="pedro1"/>
+                
 
                 <credentials>
                     <!--<clear-password password="R3m0teEjb"/>-->
-                    <clear-password password="pedro1"/>
+                  
 
                 </credentials>
             </configuration>
@@ -18,7 +18,7 @@
     </authentication-client>
     <jboss-ejb-client xmlns="urn:jboss:wildfly-client-ejb:3.0">
         <connections>
-            <connection uri="remote+http://192.168.56.102:8080" />
+            <connection uri="remote+http://localhost:8080" />
             <!-- <connection uri="remote+http://localhost:8080" /> --> <!-- Adreça del servidor on es publiquen els EJB -->
         </connections>
     </jboss-ejb-client>
