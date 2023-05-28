@@ -45,13 +45,29 @@ public class WindowsManager {
 
     }
 
-    public void createNewGame() {
+    public void disconnect(Button discon) {
         try {
+            Stage oldWindow = (Stage) discon.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 600, 400));
+            oldWindow.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    public void createNewGame(Button createGame) {
+        try {
+            Stage oldWindow = (Stage) createGame.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root, 600, 400));
+            oldWindow.close();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
