@@ -1,29 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package com.mycompany.mavenproject1;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import common.ISessionManager;
+import common.Lookups;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javax.naming.NamingException;
 
-/**
- * FXML Controller class
- *
- * @author dolorioUser
- */
 public class PantallaMainController {
 
+    private WindowsManager wm = new WindowsManager();
+
+    private static ISessionManager sm;
+
     @FXML
-    private void cambiarGenerarPartida() throws IOException {
-        App.setRoot("generarPartida");
+    private Button disconnectBut;
+
+    @FXML
+    private Button generarPartBut;
+
+    @FXML
+    private Button halfOfFameBut;
+
+    @FXML
+    void cambiarGenerarPartida(ActionEvent event) {
+        wm.createNewGame(generarPartBut);
     }
 
     @FXML
-    private void cambiarHallOfFame() throws IOException {
-        App.setRoot("hallOfFame");
+    void cambiarHallOfFame(ActionEvent event) {
+        wm.hallOfFame();
     }
+
+    @FXML
+    void desconectarse(ActionEvent event) throws NamingException {
+        sm = Lookups.sessionManagerEJBRemoteLookup();
+        sm.cerrarSesion(LoginController.token);
+        wm.disconnect(disconnectBut);
+
+    }
+
 }
