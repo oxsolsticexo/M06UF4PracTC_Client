@@ -5,6 +5,9 @@ package com.mycompany.mavenproject1.Presentacion;
 import Logica.Logica;
 import Logica.LogicaPartida;
 import com.mycompany.mavenproject1.WindowsManager;
+import common.IJugador;
+import common.Jugador;
+import common.Lookups;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javax.naming.NamingException;
 
 public class CreateGame implements Initializable {
 
@@ -86,9 +90,10 @@ public class CreateGame implements Initializable {
     }
     
     @FXML
-    void startGame(ActionEvent event) {
+    void startGame(ActionEvent event) throws NamingException {
         
         //Implementar funcion para cambiar de ventana
+
         System.out.println("Nuevo juego");
         logicaPartida.crearPartida(newGameInputText.getText(),"Juan", dificultChoiceBox.getValue());
         //manager.startGame(createButton);

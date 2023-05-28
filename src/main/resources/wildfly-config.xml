@@ -5,9 +5,9 @@
     </authentication-rules>
     <authentication-configurations>
       <configuration name="default">
-          <set-user-name name="ejbremote"/>
+          <!--<set-user-name name="ejbremote"/>-->
         <credentials>
-          <clear-password password="R3m0teEjb"/>
+          <!--<clear-password password="R3m0teEjb"/>-->
         </credentials>
       </configuration>
     </authentication-configurations>
