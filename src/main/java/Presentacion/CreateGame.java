@@ -1,9 +1,9 @@
-package com.mycompany.mavenproject1.Presentacion;
+package Presentacion;
 
 
 
 import Logica.Logica;
-import com.mycompany.mavenproject1.WindowsManager;
+import Main.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
