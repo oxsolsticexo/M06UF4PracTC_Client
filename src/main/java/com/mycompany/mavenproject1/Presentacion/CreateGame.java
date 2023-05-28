@@ -3,11 +3,9 @@ package com.mycompany.mavenproject1.Presentacion;
 
 
 import Logica.Logica;
-import Logica.LogicaPartida;
+
 import com.mycompany.mavenproject1.WindowsManager;
-import common.IJugador;
-import common.Jugador;
-import common.Lookups;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
