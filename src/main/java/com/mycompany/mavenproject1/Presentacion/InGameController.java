@@ -4,17 +4,30 @@
  */
 package com.mycompany.mavenproject1.Presentacion;
 
+import com.mycompany.mavenproject1.WindowsManager;
+import common.IPartida;
+import common.Lookups;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javax.naming.NamingException;
 
+/**
+ *
+ * @author Kiwi
+ */
 public class InGameController implements Initializable {
 
+    IPartida partida;
+    WindowsManager windowsManager;
+    
     @FXML
     private Pane PreguntaCounter_Pane;
 
@@ -57,6 +70,13 @@ public class InGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        windowsManager = new WindowsManager();
+        
+        try {
+            partida = Lookups.partidaEJBRemoteLookup();
+        } catch (NamingException ex) {
+            Logger.getLogger(InGameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @FXML
@@ -91,7 +111,7 @@ public class InGameController implements Initializable {
 
     @FXML
     void onAction_Comenzar_Button(ActionEvent event) {
-
+        
     }
 
     @FXML
