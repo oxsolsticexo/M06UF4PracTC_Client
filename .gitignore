@@ -2,3 +2,4 @@
 *.class
 *.lst
 *.log
+src/main/resources/wildfly-config.xml
