@@ -2,13 +2,9 @@ package Presentacion;
 
 import Entities.Lookups;
 import Logica.Alerts.Alerts;
-import Logica.Exceptions.SesionJugException;
 import Logica.Interfaces.IPartida;
 import Logica.Interfaces.ISessionManager;
-import Logica.Logica;
-
 import Main.WindowsManager;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.naming.NamingException;
-import nu.xom.ParsingException;
 
 public class CreateGame implements Initializable {
 
@@ -101,7 +96,6 @@ public class CreateGame implements Initializable {
             
             manager.startGame(createButton);
         }catch (NullPointerException e) {
-            System.out.println("Estoy Nulo");
             throw e;
         } catch (Exception e) {
             partida = Lookups.partidaEJBRemoteLookup();
