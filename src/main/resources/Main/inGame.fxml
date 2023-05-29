@@ -70,7 +70,7 @@
                      <children>
                         <Pane prefHeight="117.0" prefWidth="300.0" style="-fx-border-color: black;">
                            <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Jugador:" />
+                              <Label fx:id="Jugador_Label" layoutX="14.0" layoutY="14.0" text="Jugador:" />
                            </children>
                         </Pane>
                         <Pane prefHeight="141.0" prefWidth="300.0" />

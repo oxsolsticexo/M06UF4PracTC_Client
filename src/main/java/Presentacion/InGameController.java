@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javax.naming.NamingException;
 
@@ -40,10 +41,16 @@ public class InGameController implements Initializable {
     WindowsManager windowsManager;
 
     @FXML
+    private Pane RespuestaA_Pane, RespuestaB_Pane, RespuestaC_Pane;
+
+    @FXML
     private Label Pregunta_Label;
 
     @FXML
     private Label PreguntaCounter_Label;
+
+    @FXML
+    private Label Jugador_Label;
 
     @FXML
     private Label RespuestaA_Label, RespuestaB_Label, RespuestaC_Label;
@@ -135,23 +142,38 @@ public class InGameController implements Initializable {
 
     private void obtenerNuevaPregunta() {
 
-        try {
-            this.preguntaActual = iPartida.asignaPregunta();
+        if (numeroPregunta > 10) {
 
-            //Seteamos el contenido de la pregunta.
-            Pregunta_Label.setText(preguntaActual.getPregunta());
+            Pregunta_Label.setText("Partida Finalizada");
 
-            //Seteamos el contenido de las respuestas.
-            RespuestaA_Label.setText(preguntaActual.getRespuestaA());
-            RespuestaB_Label.setText(preguntaActual.getRespuestaB());
-            RespuestaC_Label.setText(preguntaActual.getRespuestaC());
+            //Limpiamos los textos
+            RespuestaA_Label.setText("");
+            RespuestaB_Label.setText("");
+            RespuestaC_Label.setText("");
 
-            //Cambiamos el contador de preguntas
-            PreguntaCounter_Label.setText("Pregunta " + numeroPregunta + "/10");
-            numeroPregunta += 1;
+            //Ocultamos los paneles.
+            RespuestaA_Pane.setVisible(false);
+            RespuestaB_Pane.setVisible(false);
+            RespuestaC_Pane.setVisible(false);
+        } else {
+            try {
+                this.preguntaActual = iPartida.asignaPregunta();
 
-        } catch (Exception ex) {
-            logger.error("Error al obtener nueva pregunta: " + ex.getMessage());
+                //Seteamos el contenido de la pregunta.
+                Pregunta_Label.setText(preguntaActual.getPregunta());
+
+                //Seteamos el contenido de las respuestas.
+                RespuestaA_Label.setText(preguntaActual.getRespuestaA());
+                RespuestaB_Label.setText(preguntaActual.getRespuestaB());
+                RespuestaC_Label.setText(preguntaActual.getRespuestaC());
+
+                //Cambiamos el contador de preguntas
+                PreguntaCounter_Label.setText("Pregunta " + numeroPregunta + "/10");
+                numeroPregunta += 1;
+
+            } catch (Exception ex) {
+                logger.error("Error al obtener nueva pregunta: " + ex.getMessage());
+            }
         }
     }
 
