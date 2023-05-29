@@ -75,8 +75,8 @@ public class HallOfFame implements Initializable {
             hallOfFameTable.setItems(newList);
             //alert.Info("Se han encontrado resultados");
         } catch (Exception e) {
-            e.printStackTrace();
-            //alert.Error(e.getMessage());
+
+            alert.Error(e.getMessage());
         }
 
     }

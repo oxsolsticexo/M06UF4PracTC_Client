@@ -1,11 +1,10 @@
 package Presentacion;
 
 import Entities.Lookups;
-import Logica.Exceptions.SesionException;
+import Logica.Alerts.Alerts;
 import Logica.Interfaces.IPartida;
 import Logica.Interfaces.ISessionManager;
 import Main.WindowsManager;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.naming.NamingException;
-import nu.xom.ParsingException;
 
 public class CreateGame implements Initializable {
 
@@ -90,16 +88,21 @@ public class CreateGame implements Initializable {
     }
 
     @FXML
-    void startGame(ActionEvent event) throws SesionException {
+    void startGame(ActionEvent event) throws NamingException {
 
         try {
             //Llamar a EJB
             partida.crearPartida(newGameInputText.getText(), LoginController.token, dificultChoiceBox.getValue());
-
+            
             manager.startGame(createButton);
-        } catch (NamingException | ParsingException | IOException | SesionException ex) {
-            Logger.getLogger(CreateGame.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+        }catch (NullPointerException e) {
+            throw e;
+        } catch (Exception e) {
+            partida = Lookups.partidaEJBRemoteLookup();
+            Alerts.Warning(e.getMessage());
+        }finally{
+            newGameInputText.requestFocus();
+            dificultChoiceBox.requestFocus();
         }
 
     }
