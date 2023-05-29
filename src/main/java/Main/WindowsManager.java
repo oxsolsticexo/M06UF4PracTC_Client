@@ -4,6 +4,7 @@
  */
 package Main;
 
+import Entities.Token;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +17,19 @@ import javafx.stage.Stage;
  * @author carlo
  */
 public class WindowsManager {
+
+    private Token token;
+
+    private static WindowsManager manager;
+
+    public static WindowsManager getInstance() {
+        if (manager == null) {
+            manager = new WindowsManager();
+        }
+
+        return manager;
+
+    }
 
     public void hallOfFame() {
         try {
@@ -102,6 +116,16 @@ public class WindowsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
+
+    }
+
+    public Token getToken() {
+        return token;
 
     }
 }

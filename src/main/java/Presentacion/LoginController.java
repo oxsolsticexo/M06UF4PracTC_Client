@@ -184,6 +184,7 @@ public class LoginController {
 
         if (token != null) {
             wm.mainMenu(botonRegistrar);
+            
         } else {
             System.out.println("EL DIABLo");
         }
