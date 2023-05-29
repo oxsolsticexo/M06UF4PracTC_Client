@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -17,8 +18,6 @@ import javafx.stage.Stage;
  * @author carlo
  */
 public class WindowsManager {
-
-    private Token token;
 
     private static WindowsManager manager;
 
@@ -31,13 +30,17 @@ public class WindowsManager {
 
     }
 
-    public void hallOfFame() {
+    public void hallOfFame(Button backButton) {
         try {
+            Stage oldWindow = (Stage) backButton.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
-            Parent root = loader.load();
 
+            Parent root = loader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("/images/Trivial.png"));
+            stage.setTitle("[Trivial] Hall Of Fame");
             stage.setScene(new Scene(root, 600, 400));
+            oldWindow.close();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,8 +52,9 @@ public class WindowsManager {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
-
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("/images/Trivial.png"));
+            stage.setTitle("[Trivial] Login");
             stage.setScene(new Scene(root, 600, 400));
             stage.show();
         } catch (IOException e) {
@@ -65,6 +69,8 @@ public class WindowsManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("/images/Trivial.png"));
+            stage.setTitle("[Trivial] Login");
             stage.setScene(new Scene(root, 600, 400));
             oldWindow.close();
             stage.show();
@@ -80,6 +86,8 @@ public class WindowsManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
+            stage.getIcons().add(new Image("/images/Trivial.png"));
+            stage.setTitle("[Trivial] New Game");
             stage.setScene(new Scene(root, 600, 400));
             oldWindow.close();
             stage.show();
@@ -95,6 +103,8 @@ public class WindowsManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("inGame.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
+            stage.setTitle("[Trivial]");
+            stage.getIcons().add(new Image("/images/Trivial.png"));
             stage.setScene(new Scene(root, 600, 400));
             oldWindow.close();
             stage.show();
@@ -110,22 +120,14 @@ public class WindowsManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pantallaMain.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
+            stage.setTitle("[Trivial] Main");
+            stage.getIcons().add(new Image("/images/Trivial.png"));
             stage.setScene(new Scene(root, 600, 400));
             oldWindow.close();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void setToken(Token token) {
-        this.token = token;
-
-    }
-
-    public Token getToken() {
-        return token;
 
     }
 }
