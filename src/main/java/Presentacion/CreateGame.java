@@ -93,14 +93,14 @@ public class CreateGame implements Initializable {
         try {
             //Llamar a EJB
             partida.crearPartida(newGameInputText.getText(), LoginController.token, dificultChoiceBox.getValue());
-            
+
             manager.startGame(createButton);
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             throw e;
         } catch (Exception e) {
             partida = Lookups.partidaEJBRemoteLookup();
             Alerts.Warning(e.getMessage());
-        }finally{
+        } finally {
             newGameInputText.requestFocus();
             dificultChoiceBox.requestFocus();
         }
