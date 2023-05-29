@@ -1,11 +1,17 @@
 package Presentacion;
 
+import Entities.Lookups;
+import Logica.Exceptions.SesionJugException;
+import Logica.Interfaces.IPartida;
+import Logica.Interfaces.ISessionManager;
 import Logica.Logica;
-import Logica.LogicaPartida;
 
 import Main.WindowsManager;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,11 +22,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.naming.NamingException;
+import nu.xom.ParsingException;
 
 public class CreateGame implements Initializable {
 
     public enum dificultades {
-        Fácil, Difícil, Normal
+        ALTA, BAJA, MEDIA
     };
 
     @FXML
@@ -54,10 +61,13 @@ public class CreateGame implements Initializable {
     Logica logicGame = new Logica();
 
     //Gestor de ventanas
-    WindowsManager manager = new WindowsManager();
+    WindowsManager manager = WindowsManager.getInstance();
 
+    public static IPartida partida;
     //Logica Partida
-    LogicaPartida logicaPartida = new LogicaPartida();
+    //LogicaPartida logicaPartida = new LogicaPartida();
+
+    ISessionManager sessionManager;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -65,6 +75,13 @@ public class CreateGame implements Initializable {
         //Dificultades
         inicializarDificultades();
         inicializarImagenes();
+        try {
+            partida = Lookups.partidaEJBRemoteLookup();
+            sessionManager = Lookups.sessionManagerEJBRemoteLookup();
+
+        } catch (NamingException ex) {
+            Logger.getLogger(CreateGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -80,12 +97,20 @@ public class CreateGame implements Initializable {
     }
 
     @FXML
-    void startGame(ActionEvent event) throws NamingException {
+    void startGame(ActionEvent event) {
 
-        //Implementar funcion para cambiar de ventana
-        System.out.println("Nuevo juego");
-        logicaPartida.crearPartida(newGameInputText.getText(), "Juan", dificultChoiceBox.getValue());
-        //manager.startGame(createButton);
+        try {
+            //Implementar funcion para cambiar de ventana
+            System.out.println("Nuevo juego");
+
+            //Llamar a EJB
+            partida.crearPartida(newGameInputText.getText(), LoginController.token, dificultChoiceBox.getValue());
+            //logicaPartida.crearPartida(newGameInputText.getText(), LoginController.token, dificultChoiceBox.getValue());
+            manager.startGame(createButton);
+        } catch (NamingException | ParsingException | IOException | SesionJugException ex) {
+            Logger.getLogger(CreateGame.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
 
     }
 
