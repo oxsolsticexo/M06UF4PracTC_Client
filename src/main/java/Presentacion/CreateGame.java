@@ -57,7 +57,7 @@ public class CreateGame implements Initializable {
     WindowsManager manager = new WindowsManager();
 
     //Logica Partida
-    LogicaPartida logicaPartida = new LogicaPartida();
+//    LogicaPartida logicaPartida = new LogicaPartida();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,7 +84,7 @@ public class CreateGame implements Initializable {
 
         //Implementar funcion para cambiar de ventana
         System.out.println("Nuevo juego");
-        logicaPartida.crearPartida(newGameInputText.getText(), "Juan", dificultChoiceBox.getValue());
+//        logicaPartida.crearPartida(newGameInputText.getText(), "Juan", dificultChoiceBox.getValue());
         //manager.startGame(createButton);
 
     }

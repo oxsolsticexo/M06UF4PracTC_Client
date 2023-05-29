@@ -90,6 +90,7 @@
 //    }
 package Presentacion;
 
+import Entities.Jugador;
 import Entities.Lookups;
 import Entities.Token;
 import Logica.Interfaces.ISessionManager;
@@ -99,9 +100,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javax.naming.NamingException;
-
-
-
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.ConstraintViolation;
+import java.lang.reflect.Field;
+import java.util.Set;
+import javax.validation.ValidatorFactory;
 
 public class LoginController {
 
@@ -128,32 +133,39 @@ public class LoginController {
 
     @FXML
     void loginToPantallaMain(ActionEvent event) throws NamingException {
+        Boolean mailInvalido = false;
+        // Obtenemos una instancia del validador
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        // instancia del gestor de sesiones
         sm = Lookups.sessionManagerEJBRemoteLookup();
-
+        //userLogin es el textField de Login.fxml
         String mailLogin = userLogin.getText();
-        
+        // Crea una instancia de la entidad Jugador y configura el campo de correo electrónico con un valor inválido
+        Jugador jugador = new Jugador();
+        jugador.setEmail(mailLogin);
+
+        // Valida la entidad Jugador y obtén los resultados de validación
+        Set<ConstraintViolation<Jugador>> violations = validator.validate(jugador);
+        //si el campo login no es nulo
         if (mailLogin != null) {
-            token = sm.loginJugador(userLogin.getText());
+            //recorremos las violaciones de restricción
+            for (ConstraintViolation<Jugador> violation : violations) {
+                //controlamos si existe una violación de restricción de email
+                if (violation.getPropertyPath().toString().equals("email")) {
+                    //en caso de existir poner esta variable a true para que no cree el token
+                    mailInvalido = true;
+                }
+            }
+            //si el mailInvalido sigue en false significa que no existe violación de restricción
+            if (mailInvalido == false) {
+                token = sm.loginJugador(userLogin.getText());
+            }
         }
 
         System.out.println("el correo es : " + mailLogin);
-
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("pantallaMain.fxml"));
-//        Parent root = loader.load();
-//        PantallaMainController controller = loader.getController();
-//        Scene scene = mailLogin.getScene();
-//        scene.setRoot(root);
-//        App.setRoot("pantallaMain.fxml");
+        //en caso de tener un token para el cliente accedemos a la siguiente pantalla "pantallaMain"
         if (token != null) {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("pantallaMain.fxml"));
-//            Parent root = loader.load();
-//            WindowsManager wm = new WindowsManager();
-//            wm.mainMenu(botonLogin);
-//            PantallaMainController controller = loader.getController();
-//            Scene scene = mailLogin.getScene();
-//            scene.setRoot(root);
-            // Si es necesario, puedes pasar el token al controlador de la pantallaMain
-//            controller.setToken(token);
             wm.mainMenu(botonLogin);
         }
     }
