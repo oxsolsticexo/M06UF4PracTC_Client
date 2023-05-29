@@ -6,6 +6,8 @@ import Logica.LogicaPartida;
 import Main.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,12 +59,17 @@ public class CreateGame implements Initializable {
     WindowsManager manager = new WindowsManager();
 
     //Logica Partida
-    LogicaPartida logicaPartida = new LogicaPartida();
+    LogicaPartida logicaPartida;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //Dificultades
+        try {
+            //Dificultades
+            logicaPartida = new LogicaPartida();
+        } catch (NamingException ex) {
+            Logger.getLogger(CreateGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         inicializarDificultades();
         inicializarImagenes();
 
