@@ -28,5 +28,10 @@
       </Label>
       <TextField fx:id="userLogin" layoutX="56.0" layoutY="158.0" prefWidth="200.0" />
       <Button fx:id="botonRegistrar" layoutX="414.0" layoutY="273.0" mnemonicParsing="false" onAction="#registroToPantallaMain" text="Registrar" />
+      <Label fx:id="validationLabel" layoutX="163.0" layoutY="316.0" prefHeight="63.0" prefWidth="274.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
