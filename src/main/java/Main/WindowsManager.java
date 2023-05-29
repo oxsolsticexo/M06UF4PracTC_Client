@@ -71,6 +71,7 @@ public class WindowsManager {
             stage.getIcons().add(new Image("/images/Trivial.png"));
             stage.setTitle("[Trivial] Login");
             stage.setScene(new Scene(root, 600, 400));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,6 +87,7 @@ public class WindowsManager {
             stage.getIcons().add(new Image("/images/Trivial.png"));
             stage.setTitle("[Trivial] Login");
             stage.setScene(new Scene(root, 600, 400));
+            stage.setResizable(false);
             oldWindow.close();
             stage.show();
         } catch (IOException e) {

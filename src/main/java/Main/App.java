@@ -22,6 +22,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("[Trivial] Login");
         stage.getIcons().add(new Image("/images/Trivial.png"));
+        stage.setResizable(false);
         stage.show();
     }
 
