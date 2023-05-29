@@ -39,6 +39,7 @@ public class WindowsManager {
             stage.getIcons().add(new Image("/images/Trivial.png"));
             stage.setTitle("[Trivial] Hall Of Fame");
             stage.setScene(new Scene(root, 600, 400));
+            stage.setResizable(false);
             oldWindow.close();
             stage.show();
         } catch (IOException e) {
@@ -95,7 +96,7 @@ public class WindowsManager {
         }
     }
 
-    public void createNewGame(Button createGame) {
+    public void createNewGame(Button createGame) throws Exception {
         try {
             Stage oldWindow = (Stage) createGame.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("primary.fxml"));
@@ -106,12 +107,12 @@ public class WindowsManager {
             stage.setScene(new Scene(root, 600, 400));
             oldWindow.close();
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw e;
         }
     }
 
-    public void startGame(Button createButton) {
+    public void startGame(Button createButton) throws Exception {
         try {
             Stage oldWindow = (Stage) createButton.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("inGame.fxml"));
@@ -123,8 +124,8 @@ public class WindowsManager {
             stage.setResizable(false);
             oldWindow.close();
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw e;
         }
 
     }
