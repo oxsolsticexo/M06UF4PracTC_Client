@@ -4,8 +4,8 @@
  */
 package Presentacion;
 
-import Entities.Jugador;
 import Entities.Pregunta;
+import Logica.Alerts.Alerts;
 import Logica.Exceptions.SesionException;
 import Logica.Interfaces.IPartida;
 import Main.WindowsManager;
@@ -31,7 +31,7 @@ import javax.naming.NamingException;
  * @author Kiwi
  */
 public class InGameController implements Initializable {
-    
+
     private Timeline timeline;
     private static Logger logger;
     private IPartida iPartida;
@@ -40,106 +40,105 @@ public class InGameController implements Initializable {
     private int numeroPregunta;
     private int numPreguntasAcertadas;
     private int numPreguntasFallidas;
-    private Jugador jugador;
-    
+
     WindowsManager windowsManager;
-    
+
     @FXML
     private Label NombreJugador_Label, PuntuacionTotal_Label, Fallidas_Label, Acertadas_Label, PuntuacionPartida_Label;
-    
+
     @FXML
     private Pane RespuestaA_Pane, RespuestaB_Pane, RespuestaC_Pane;
-    
+
     @FXML
     private TextArea Pregunta_TextArea;
-    
+
     @FXML
     private Label PreguntaCounter_Label;
-    
+
     @FXML
     private Label RespuestaA_Label, RespuestaB_Label, RespuestaC_Label;
-    
+
     @FXML
     private Button Comenzar_Button, Abandonar_Button;
-    
+
     @FXML
     private Label Timer_Label;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         puntuacionJugador = 0f;
-        
+
         logger = LogManager.getLogger(InGameController.class);
-        
+
         numeroPregunta = 1;
-        
+
         iPartida = CreateGame.partida;
         windowsManager = WindowsManager.getInstance();
-        
+
     }
-    
+
     @FXML
     void onMouseClicked_RespuestaA_Pane(MouseEvent event) {
-        
+
         System.out.println("click A");
-        
+
         if (preguntaActual.getRespuestaCorrecta().contentEquals("A")) {
-            
+
             this.puntuacionJugador += iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
-            
+
             PuntuacionPartida_Label.setText("" + puntuacionJugador);
             numPreguntasAcertadas++;
             Acertadas_Label.setText("" + numPreguntasAcertadas);
-            
+
             System.out.println(puntuacionJugador);
         } else {
-            
+
             numPreguntasFallidas++;
             Fallidas_Label.setText("" + numPreguntasFallidas);
-            
+
         }
-        
+
         obtenerNuevaPregunta();
         //Reiniciamos el temporizador
         iPartida.detenerTiempo();
         iPartida.iniciarTiempo();
     }
-    
+
     @FXML
     void onMouseClicked_RespuestaB_Pane(MouseEvent event) {
         System.out.println("click B");
-        
+
         if (preguntaActual.getRespuestaCorrecta().contentEquals("B")) {
-            
+
             this.puntuacionJugador += iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
             System.out.println(puntuacionJugador);
-            
+
             PuntuacionPartida_Label.setText("" + puntuacionJugador);
-            
+
             numPreguntasAcertadas++;
             Acertadas_Label.setText("" + numPreguntasAcertadas);
-            
+
         } else {
             numPreguntasFallidas++;
             Fallidas_Label.setText("" + numPreguntasFallidas);
         }
-        
+
         obtenerNuevaPregunta();
         //Reiniciamos el temporizador
         iPartida.detenerTiempo();
         iPartida.iniciarTiempo();
     }
-    
+
     @FXML
     void onMouseClicked_RespuestaC_Pane(MouseEvent event) {
         System.out.println("click C");
-        
+
         if (preguntaActual.getRespuestaCorrecta().contentEquals("C")) {
-            
+
             this.puntuacionJugador += iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
             System.out.println(puntuacionJugador);
-            
+
             PuntuacionPartida_Label.setText("" + puntuacionJugador);
             numPreguntasAcertadas++;
             Acertadas_Label.setText("" + numPreguntasAcertadas);
@@ -147,39 +146,41 @@ public class InGameController implements Initializable {
             numPreguntasFallidas++;
             Fallidas_Label.setText("" + numPreguntasFallidas);
         }
-        
+
         obtenerNuevaPregunta();
         //Reiniciamos el temporizador
         iPartida.detenerTiempo();
         iPartida.iniciarTiempo();
     }
-    
+
     @FXML
     void onAction_Comenzar_Button(ActionEvent event) {
-        
+
         obtenerNuevaPregunta(); //TODO Controlar posibles errores
         try {
 
             //Obtenemos los marcadores del jugador            
             NombreJugador_Label.setText(iPartida.getNickJugador(LoginController.token));
             PuntuacionTotal_Label.setText(String.valueOf(iPartida.getPuntuacionJugador(LoginController.token)));
-            
+
         } catch (SesionException ex) {
+            Alerts.Error("Error al obtener el token del jugador: " + ex.getMessage());
             logger.error("Error al obtener el token del jugador: " + ex.getMessage());
         } catch (NamingException ex) {
+            Alerts.Error("Error al obtener la instancia del EJB: " + ex.getMessage());
             logger.error("Error al obtener la instancia del EJB: " + ex.getMessage());
         }
 
         //Empezamos el timer y seteamos el valor del Timer en cada segundo.
         iPartida.iniciarTiempo();
         lineaTemporal();
-        
+
         Comenzar_Button.setDisable(true);
     }
-    
+
     @FXML
     void onAction_Abandonar_Button(ActionEvent event) {
-        
+
         windowsManager.mainMenu(Abandonar_Button);
     }
 
@@ -187,23 +188,25 @@ public class InGameController implements Initializable {
      * Lógica para obtener una nueva pregunta
      */
     private void obtenerNuevaPregunta() {
-        
+
         System.out.println("Numero pregunta: " + numeroPregunta);
         if (numeroPregunta > 10) {
-            
+
             try {
                 //Llevamos el token al servidor junto a los datos de la partida
                 iPartida.persistirDatosPartida(LoginController.token, puntuacionJugador);
             } catch (SesionException ex) {
+                Alerts.Error("Error al obtener el token del jugador: " + ex.getMessage());
                 logger.error("Error al obtener el token del jugador: " + ex.getMessage());
             } catch (NamingException ex) {
+                Alerts.Error("Error al obtener la instancia del EJB: " + ex.getMessage());
                 logger.error("Error al obtener la instancia del EJB: " + ex.getMessage());
             }
 
             //Detenemos el timer
             timeline.stop();
             Timer_Label.setText("Timer: --");
-            
+
             Pregunta_TextArea.setText("Partida Finalizada");
 
             //Limpiamos los textos
@@ -230,8 +233,9 @@ public class InGameController implements Initializable {
                 //Cambiamos el contador de preguntas
                 PreguntaCounter_Label.setText("Pregunta " + numeroPregunta + "/10");
                 numeroPregunta += 1;
-                
+
             } catch (Exception ex) {
+                Alerts.Error("Error al obtener nueva pregunta: " + ex.getMessage());
                 logger.error("Error al obtener nueva pregunta: " + ex.getMessage());
             }
         }
@@ -250,9 +254,9 @@ public class InGameController implements Initializable {
             // Aquí puedes actualizar el tiempo restante en tu componente visual
             int tiempoRestante = iPartida.getTiempoRestante(); // Obtiene el tiempo restante del EJB
             Timer_Label.setText("Timer: " + String.valueOf(tiempoRestante));
-            
+
             if (tiempoRestante <= 0) {
-                
+
                 obtenerNuevaPregunta(); // Detiene el Timeline cuando se alcanza 0
                 iPartida.detenerTiempo();
                 iPartida.iniciarTiempo();
