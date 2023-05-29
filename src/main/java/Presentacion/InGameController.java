@@ -6,12 +6,10 @@ package Presentacion;
 
 import Entities.Pregunta;
 import Logica.Exceptions.SesionException;
-import Logica.Exceptions.SesionJugException;
 import Logica.Interfaces.IPartida;
 import Main.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javafx.animation.KeyFrame;
