@@ -46,15 +46,16 @@ public class LoginController {
         sm = Lookups.sessionManagerEJBRemoteLookup();
         //userLogin es el textField de Login.fxml
         String mailLogin = userLogin.getText();
-        //si el campo login no es nulo
+        //si el campo login no es nulo y el correo es válido
         if (mailLogin != null && validarCorreo(mailLogin)) {
+            //buscamos que el usuario exista y devolvemos su token
             token = sm.loginJugador(userLogin.getText());
+            //en caso del token no ser nulo pasamos a la siguiente pantalla
             if (token != null) {
                 wm.mainMenu(botonLogin);
             } else {
                 validationLabel.setText("Error en la consulta");
             }
-
         } else {
             validationLabel.setText("El email no es válido");
 

@@ -51,7 +51,7 @@ public class WindowsManager {
             Parent root = loader.load();
 
             Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 400));
+            stage.setScene(new Scene(root, 600, 500));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
