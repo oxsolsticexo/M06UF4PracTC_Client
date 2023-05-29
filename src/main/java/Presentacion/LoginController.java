@@ -1,6 +1,5 @@
 package Presentacion;
 
-import Entities.Jugador;
 import Entities.Lookups;
 import Entities.Token;
 import Logica.Interfaces.ISessionManager;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javax.naming.NamingException;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.scene.control.Label;
@@ -41,6 +39,7 @@ public class LoginController {
     @FXML
     private Label validationLabel;
 
+
     @FXML
     void loginToPantallaMain(ActionEvent event) throws NamingException {
         sm = Lookups.sessionManagerEJBRemoteLookup();
@@ -52,9 +51,10 @@ public class LoginController {
             token = sm.loginJugador(userLogin.getText());
             //en caso del token no ser nulo pasamos a la siguiente pantalla
             if (token != null) {
+                validationLabel.setText(" ");
                 wm.mainMenu(botonLogin);
             } else {
-                validationLabel.setText("Error en la consulta");
+                validationLabel.setText("Error en la consulta\t(es posible que el usuario o el mail ya existan)");
             }
         } else {
             validationLabel.setText("El email no es válido");
@@ -81,6 +81,7 @@ public class LoginController {
                 //en caso de que el token no sea nulo avanzamos al usuario a la siguiente pantalla
                 //ya que se habrá generado una sesión y el jugador se encuentra en la BD
                 if (token != null) {
+                    validationLabel.setText(" ");
                     wm.mainMenu(botonRegistrar);
                 } else {
                     validationLabel.setText("Error en la consulta");
