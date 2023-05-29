@@ -32,7 +32,7 @@ public class PantallaMainController {
 
     @FXML
     void cambiarHallOfFame(ActionEvent event) {
-        wm.hallOfFame();
+        wm.hallOfFame(halfOfFameBut);
     }
 
     @FXML
