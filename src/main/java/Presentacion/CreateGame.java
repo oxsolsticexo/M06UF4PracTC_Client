@@ -57,15 +57,10 @@ public class CreateGame implements Initializable {
     @FXML
     private Label selectDificultLabel;
 
-    //Global variables
-    Logica logicGame = new Logica();
-
     //Gestor de ventanas
     WindowsManager manager = WindowsManager.getInstance();
 
     public static IPartida partida;
-    //Logica Partida
-    //LogicaPartida logicaPartida = new LogicaPartida();
 
     ISessionManager sessionManager;
 
@@ -100,12 +95,9 @@ public class CreateGame implements Initializable {
     void startGame(ActionEvent event) {
 
         try {
-            //Implementar funcion para cambiar de ventana
-            System.out.println("Nuevo juego");
-
             //Llamar a EJB
             partida.crearPartida(newGameInputText.getText(), LoginController.token, dificultChoiceBox.getValue());
-            //logicaPartida.crearPartida(newGameInputText.getText(), LoginController.token, dificultChoiceBox.getValue());
+
             manager.startGame(createButton);
         } catch (NamingException | ParsingException | IOException | SesionJugException ex) {
             Logger.getLogger(CreateGame.class.getName()).log(Level.SEVERE, null, ex);

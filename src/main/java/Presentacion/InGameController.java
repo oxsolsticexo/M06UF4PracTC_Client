@@ -4,15 +4,12 @@
  */
 package Presentacion;
 
-import Entities.Lookups;
 import Entities.Pregunta;
 import Logica.Interfaces.IPartida;
 import Logica.Interfaces.IPregunta;
 import Main.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -22,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import javax.naming.NamingException;
 
 /**
  *
@@ -101,9 +97,6 @@ public class InGameController implements Initializable {
 
         try {
             Pregunta p = partida.asignaPregunta();
-
-            System.out.println("2 - " + p);
-            System.out.println("3 - " + p.getPregunta());
 
             //Seteamos el contenido de la pregunta.
             Pregunta_Label.setText(p.getPregunta());
