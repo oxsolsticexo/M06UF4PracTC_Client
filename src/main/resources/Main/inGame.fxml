@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="824.0" prefWidth="1163.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.InGameController">
+<AnchorPane id="AnchorPane" prefHeight="824.0" prefWidth="1163.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentacion.InGameController">
    <children>
       <SplitPane dividerPositions="0.7364341085271318" prefHeight="824.0" prefWidth="1163.0">
         <items>

@@ -1,9 +1,9 @@
-package com.mycompany.mavenproject1.Presentacion;
-
-
+package Presentacion;
 
 import Logica.Logica;
-import com.mycompany.mavenproject1.WindowsManager;
+import Logica.LogicaPartida;
+
+import Main.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,16 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javax.naming.NamingException;
 
 public class CreateGame implements Initializable {
 
-    WindowsManager manager = new WindowsManager();
-    
     public enum dificultades {
         Fácil, Difícil, Normal
     };
-
-    public static final int maxJugadores = 4;
 
     @FXML
     private Button cancelButton;
@@ -52,9 +49,15 @@ public class CreateGame implements Initializable {
 
     @FXML
     private Label selectDificultLabel;
-    
+
     //Global variables
     Logica logicGame = new Logica();
+
+    //Gestor de ventanas
+    WindowsManager manager = new WindowsManager();
+
+    //Logica Partida
+    LogicaPartida logicaPartida = new LogicaPartida();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,9 +65,7 @@ public class CreateGame implements Initializable {
         //Dificultades
         inicializarDificultades();
         inicializarImagenes();
-        
 
-        
     }
 
     void inicializarDificultades() {
@@ -77,24 +78,23 @@ public class CreateGame implements Initializable {
         Image logo = new Image("/images/Trivial.png");
         imageLogo.setImage(logo);
     }
-    
+
     @FXML
-    void startGame(ActionEvent event) {
-        
+    void startGame(ActionEvent event) throws NamingException {
+
         //Implementar funcion para cambiar de ventana
         System.out.println("Nuevo juego");
-        manager.startGame(createButton);
+        logicaPartida.crearPartida(newGameInputText.getText(), "Juan", dificultChoiceBox.getValue());
+        //manager.startGame(createButton);
 
     }
-    
+
     @FXML
     void cancelButton(ActionEvent event) {
-        
+
         //Implementar funcion para cambiar de ventana
         manager.mainMenu(cancelButton);
-        
 
     }
-    
 
 }
