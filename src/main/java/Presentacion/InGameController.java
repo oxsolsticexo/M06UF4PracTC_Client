@@ -4,10 +4,8 @@
  */
 package Presentacion;
 
-import Entities.Lookups;
 import Entities.Pregunta;
 import Logica.Interfaces.IPartida;
-import Logica.Interfaces.IPregunta;
 import Main.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import javax.naming.NamingException;
 
 /**
  *
@@ -31,14 +28,19 @@ import javax.naming.NamingException;
  */
 public class InGameController implements Initializable {
 
+    private Timeline timeline;
     private static Logger logger;
     private IPartida iPartida;
-    private IPregunta iPregunta;
     private Pregunta preguntaActual;
     private Float puntuacionJugador;
     private int numeroPregunta;
+    private int numPreguntasAcertadas;
+    private int numPreguntasFallidas;
 
     WindowsManager windowsManager;
+
+    @FXML
+    private Label NombreJugador_Label, PuntuacionTotal_Label, Fallidas_Label, Acertadas_Label, PuntuacionPartida_Label;
 
     @FXML
     private Pane RespuestaA_Pane, RespuestaB_Pane, RespuestaC_Pane;
@@ -48,9 +50,6 @@ public class InGameController implements Initializable {
 
     @FXML
     private Label PreguntaCounter_Label;
-
-    @FXML
-    private Label Jugador_Label;
 
     @FXML
     private Label RespuestaA_Label, RespuestaB_Label, RespuestaC_Label;
@@ -64,17 +63,15 @@ public class InGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        puntuacionJugador = 0f;
+
         logger = LogManager.getLogger(InGameController.class);
 
         numeroPregunta = 1;
 
-        try {
-            iPartida = CreateGame.partida;
-            iPregunta = Lookups.preguntaEJBRemoteLookup();
-            windowsManager = new WindowsManager();
-        } catch (NamingException ex) {
-            logger.error("Error al inicializar los EJB");
-        }
+        iPartida = CreateGame.partida;
+        windowsManager = new WindowsManager();
+
     }
 
     @FXML
@@ -84,9 +81,20 @@ public class InGameController implements Initializable {
 
         if (preguntaActual.getRespuestaCorrecta().contentEquals("A")) {
 
-            this.puntuacionJugador = iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
+            this.puntuacionJugador += iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
+
+            PuntuacionPartida_Label.setText("" + puntuacionJugador);
+            numPreguntasAcertadas++;
+            Acertadas_Label.setText("" + numPreguntasAcertadas);
+
             System.out.println(puntuacionJugador);
+        } else {
+
+            numPreguntasFallidas++;
+            Fallidas_Label.setText("" + numPreguntasFallidas);
+
         }
+
         obtenerNuevaPregunta();
         //Reiniciamos el temporizador
         iPartida.detenerTiempo();
@@ -99,9 +107,19 @@ public class InGameController implements Initializable {
 
         if (preguntaActual.getRespuestaCorrecta().contentEquals("B")) {
 
-            this.puntuacionJugador = iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
+            this.puntuacionJugador += iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
             System.out.println(puntuacionJugador);
+
+            PuntuacionPartida_Label.setText("" + puntuacionJugador);
+
+            numPreguntasAcertadas++;
+            Acertadas_Label.setText("" + numPreguntasAcertadas);
+
+        } else {
+            numPreguntasFallidas++;
+            Fallidas_Label.setText("" + numPreguntasFallidas);
         }
+
         obtenerNuevaPregunta();
         //Reiniciamos el temporizador
         iPartida.detenerTiempo();
@@ -114,9 +132,17 @@ public class InGameController implements Initializable {
 
         if (preguntaActual.getRespuestaCorrecta().contentEquals("C")) {
 
-            this.puntuacionJugador = iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
+            this.puntuacionJugador += iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
             System.out.println(puntuacionJugador);
+
+            PuntuacionPartida_Label.setText("" + puntuacionJugador);
+            numPreguntasAcertadas++;
+            Acertadas_Label.setText("" + numPreguntasAcertadas);
+        } else {
+            numPreguntasFallidas++;
+            Fallidas_Label.setText("" + numPreguntasFallidas);
         }
+
         obtenerNuevaPregunta();
         //Reiniciamos el temporizador
         iPartida.detenerTiempo();
@@ -142,7 +168,12 @@ public class InGameController implements Initializable {
 
     private void obtenerNuevaPregunta() {
 
+        System.out.println("Numero pregunta: " + numeroPregunta);
         if (numeroPregunta > 10) {
+
+            //Detenemos el timer
+            timeline.stop();
+            Timer_Label.setText("Timer: --");
 
             Pregunta_Label.setText("Partida Finalizada");
 
@@ -186,20 +217,19 @@ public class InGameController implements Initializable {
     private void lineaTemporal() {
 
         // Crea el Timeline con un evento que se ejecuta cada segundo
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), (ActionEvent event) -> {
+        this.timeline = new Timeline(new KeyFrame(Duration.seconds(1), (ActionEvent event) -> {
             // Aquí puedes actualizar el tiempo restante en tu componente visual
             int tiempoRestante = iPartida.getTiempoRestante(); // Obtiene el tiempo restante del EJB
             Timer_Label.setText("Timer: " + String.valueOf(tiempoRestante));
 
-            // Verifica si se ha alcanzado el tiempo restante inicial
             if (tiempoRestante <= 0) {
 
                 obtenerNuevaPregunta(); // Detiene el Timeline cuando se alcanza 0
                 iPartida.detenerTiempo();
                 iPartida.iniciarTiempo();
-
             }
 
+            // Verifica si se ha alcanzado el tiempo restante inicial
         }));
         // Configura el Timeline para que se repita N segundos
         timeline.setCycleCount(Timeline.INDEFINITE); //TODO parar el temporizador cuando no queden preguntas
