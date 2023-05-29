@@ -4,12 +4,15 @@
  */
 package Presentacion;
 
+import Entities.Lookups;
 import Entities.Pregunta;
 import Logica.Interfaces.IPartida;
 import Logica.Interfaces.IPregunta;
 import Main.WindowsManager;
 import java.net.URL;
 import java.util.ResourceBundle;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -17,8 +20,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
+import javax.naming.NamingException;
 
 /**
  *
@@ -26,25 +30,20 @@ import javafx.util.Duration;
  */
 public class InGameController implements Initializable {
 
-    IPartida partida;
-    IPregunta pregunta;
+    private static Logger logger;
+    private IPartida iPartida;
+    private IPregunta iPregunta;
+    private Pregunta preguntaActual;
+    private Float puntuacionJugador;
+    private int numeroPregunta;
 
     WindowsManager windowsManager;
-
-    @FXML
-    private Pane PreguntaCounter_Pane;
 
     @FXML
     private Label Pregunta_Label;
 
     @FXML
     private Label PreguntaCounter_Label;
-
-    @FXML
-    private Pane Pregunta_Pane;
-
-    @FXML
-    private Pane RespuestaA_Pane, RespuestaB_Pane, RespuestaC_Pane;
 
     @FXML
     private Label RespuestaA_Label, RespuestaB_Label, RespuestaC_Label;
@@ -57,64 +56,76 @@ public class InGameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        partida = CreateGame.partida;
-        windowsManager = new WindowsManager();
 
+        logger = LogManager.getLogger(InGameController.class);
+
+        numeroPregunta = 1;
+
+        try {
+            iPartida = CreateGame.partida;
+            iPregunta = Lookups.preguntaEJBRemoteLookup();
+            windowsManager = new WindowsManager();
+        } catch (NamingException ex) {
+            logger.error("Error al inicializar los EJB");
+        }
     }
 
     @FXML
-    void onMouseClicked_RespuestaA_Pane(ActionEvent event) {
+    void onMouseClicked_RespuestaA_Pane(MouseEvent event) {
 
+        System.out.println("click A");
+
+        if (preguntaActual.getRespuestaCorrecta().contentEquals("A")) {
+
+            this.puntuacionJugador = iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
+            System.out.println(puntuacionJugador);
+        }
+        obtenerNuevaPregunta();
+        //Reiniciamos el temporizador
+        iPartida.detenerTiempo();
+        iPartida.iniciarTiempo();
     }
 
     @FXML
-    void onMouseClicked_RespuestaA_Label(ActionEvent event) {
+    void onMouseClicked_RespuestaB_Pane(MouseEvent event) {
+        System.out.println("click B");
 
+        if (preguntaActual.getRespuestaCorrecta().contentEquals("B")) {
+
+            this.puntuacionJugador = iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
+            System.out.println(puntuacionJugador);
+        }
+        obtenerNuevaPregunta();
+        //Reiniciamos el temporizador
+        iPartida.detenerTiempo();
+        iPartida.iniciarTiempo();
     }
 
     @FXML
-    void onMouseClicked_RespuestaB_Pane(ActionEvent event) {
+    void onMouseClicked_RespuestaC_Pane(MouseEvent event) {
+        System.out.println("click C");
 
-    }
+        if (preguntaActual.getRespuestaCorrecta().contentEquals("C")) {
 
-    @FXML
-    void onMouseClicked_RespuestaB_Label(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onMouseClicked_RespuestaC_Pane(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onMouseClicked_RespuestaC_Label(ActionEvent event) {
-
+            this.puntuacionJugador = iPartida.calculaPuntuacion(iPartida.getTiempoRestante());
+            System.out.println(puntuacionJugador);
+        }
+        obtenerNuevaPregunta();
+        //Reiniciamos el temporizador
+        iPartida.detenerTiempo();
+        iPartida.iniciarTiempo();
     }
 
     @FXML
     void onAction_Comenzar_Button(ActionEvent event) {
 
-        try {
-            Pregunta p = partida.asignaPregunta();
+        obtenerNuevaPregunta(); //TODO Controlar posibles errores
 
-            //Seteamos el contenido de la pregunta.
-            Pregunta_Label.setText(p.getPregunta());
+        //Empezamos el timer y seteamos el valor del Timer en cada segundo.
+        iPartida.iniciarTiempo();
+        lineaTemporal();
 
-            //Seteamos el contenido de las respuestas.
-            RespuestaA_Label.setText(p.getRespuestaA());
-            RespuestaB_Label.setText(p.getRespuestaB());
-            RespuestaC_Label.setText(p.getRespuestaC());
-
-            //Empezamos el timer y seteamos el valor del Timer en cada segundo.
-            partida.iniciarTiempo();
-            lineaTemporal(partida);
-
-            Comenzar_Button.setDisable(true);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        Comenzar_Button.setDisable(true);
     }
 
     @FXML
@@ -122,24 +133,54 @@ public class InGameController implements Initializable {
 
     }
 
-    private void lineaTemporal(IPartida partida) {
+    private void obtenerNuevaPregunta() {
 
-        int tiempoRestanteInicial = partida.getTiempoRestante();
+        try {
+            this.preguntaActual = iPartida.asignaPregunta();
+
+            //Seteamos el contenido de la pregunta.
+            Pregunta_Label.setText(preguntaActual.getPregunta());
+
+            //Seteamos el contenido de las respuestas.
+            RespuestaA_Label.setText(preguntaActual.getRespuestaA());
+            RespuestaB_Label.setText(preguntaActual.getRespuestaB());
+            RespuestaC_Label.setText(preguntaActual.getRespuestaC());
+
+            //Cambiamos el contador de preguntas
+            PreguntaCounter_Label.setText("Pregunta " + numeroPregunta + "/10");
+            numeroPregunta += 1;
+
+        } catch (Exception ex) {
+            logger.error("Error al obtener nueva pregunta: " + ex.getMessage());
+        }
+    }
+
+    /**
+     * Obtiene el Bean "Partida" para gestionar el temporizador de la capa de
+     * presentación
+     *
+     * @param partida
+     */
+    private void lineaTemporal() {
 
         // Crea el Timeline con un evento que se ejecuta cada segundo
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), (ActionEvent event) -> {
             // Aquí puedes actualizar el tiempo restante en tu componente visual
-            int tiempoRestante = partida.getTiempoRestante(); // Obtiene el tiempo restante del EJB
-            Timer_Label.setText(String.valueOf(tiempoRestante));
+            int tiempoRestante = iPartida.getTiempoRestante(); // Obtiene el tiempo restante del EJB
+            Timer_Label.setText("Timer: " + String.valueOf(tiempoRestante));
 
             // Verifica si se ha alcanzado el tiempo restante inicial
             if (tiempoRestante <= 0) {
-                partida.detenerTiempo(); // Detiene el Timeline cuando se alcanza 0
+
+                obtenerNuevaPregunta(); // Detiene el Timeline cuando se alcanza 0
+                iPartida.detenerTiempo();
+                iPartida.iniciarTiempo();
+
             }
 
         }));
-        // Configura el Timeline para que se repita indefinidamente
-        timeline.setCycleCount(tiempoRestanteInicial);
+        // Configura el Timeline para que se repita N segundos
+        timeline.setCycleCount(Timeline.INDEFINITE); //TODO parar el temporizador cuando no queden preguntas
 
         // Inicia el Timeline
         timeline.play();

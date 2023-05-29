@@ -16,7 +16,7 @@
                <children>
                   <VBox prefHeight="822.0" prefWidth="851.0">
                      <children>
-                        <Pane fx:id="PreguntaCounter_Pane" prefHeight="123.0" prefWidth="851.0" style="-fx-border-color: black;">
+                        <Pane prefHeight="123.0" prefWidth="851.0" style="-fx-border-color: black;">
                            <children>
                               <Label fx:id="PreguntaCounter_Label" layoutX="347.0" layoutY="34.0" prefHeight="49.0" prefWidth="157.0" text="Pregunta 1/10">
                                  <font>
@@ -28,7 +28,7 @@
                                  </font></Label>
                            </children>
                         </Pane>
-                        <Pane fx:id="Pregunta_Pane" prefHeight="300.0" prefWidth="850.0" style="-fx-border-color: black;">
+                        <Pane prefHeight="300.0" prefWidth="850.0" style="-fx-border-color: black;">
                            <children>
                               <Label fx:id="Pregunta_Label" layoutX="366.0" layoutY="124.0" text="Pregunta">
                                  <font>
@@ -38,7 +38,7 @@
                            </children></Pane>
                         <Pane fx:id="RespuestaA_Pane" onMouseClicked="#onMouseClicked_RespuestaA_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
                            <children>
-                              <Label fx:id="RespuestaA_Label" layoutX="344.0" layoutY="47.0" onMouseClicked="#onMouseClicked_RespuestaA_Label" text="Respuesta A">
+                              <Label fx:id="RespuestaA_Label" layoutX="344.0" layoutY="47.0" text="Respuesta A">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -46,7 +46,7 @@
                            </children></Pane>
                         <Pane fx:id="RespuestaB_Pane" onMouseClicked="#onMouseClicked_RespuestaB_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
                            <children>
-                              <Label fx:id="RespuestaB_Label" layoutX="344.0" layoutY="47.0" onMouseClicked="#onMouseClicked_RespuestaB_Label" text="Respuesta B">
+                              <Label fx:id="RespuestaB_Label" layoutX="344.0" layoutY="47.0" text="Respuesta B">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -54,7 +54,7 @@
                            </children></Pane>
                         <Pane fx:id="RespuestaC_Pane" onMouseClicked="#onMouseClicked_RespuestaC_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
                            <children>
-                              <Label fx:id="RespuestaC_Label" layoutX="344.0" layoutY="47.0" onMouseClicked="#onMouseClicked_RespuestaC_Label" text="Respuesta C">
+                              <Label fx:id="RespuestaC_Label" layoutX="344.0" layoutY="47.0" text="Respuesta C">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
