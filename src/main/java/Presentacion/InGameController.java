@@ -4,8 +4,8 @@
  */
 package Presentacion;
 
-import Entities.Jugador;
 import Entities.Pregunta;
+import Logica.Alerts.Alerts;
 import Logica.Exceptions.SesionException;
 import Logica.Interfaces.IPartida;
 import Main.WindowsManager;
@@ -40,7 +40,6 @@ public class InGameController implements Initializable {
     private int numeroPregunta;
     private int numPreguntasAcertadas;
     private int numPreguntasFallidas;
-    private Jugador jugador;
 
     WindowsManager windowsManager;
 
@@ -165,8 +164,10 @@ public class InGameController implements Initializable {
             PuntuacionTotal_Label.setText(String.valueOf(iPartida.getPuntuacionJugador(LoginController.token)));
 
         } catch (SesionException ex) {
+            Alerts.Error("Error al obtener el token del jugador: " + ex.getMessage());
             logger.error("Error al obtener el token del jugador: " + ex.getMessage());
         } catch (NamingException ex) {
+            Alerts.Error("Error al obtener la instancia del EJB: " + ex.getMessage());
             logger.error("Error al obtener la instancia del EJB: " + ex.getMessage());
         }
 
@@ -195,8 +196,10 @@ public class InGameController implements Initializable {
                 //Llevamos el token al servidor junto a los datos de la partida
                 iPartida.persistirDatosPartida(LoginController.token, puntuacionJugador);
             } catch (SesionException ex) {
+                Alerts.Error("Error al obtener el token del jugador: " + ex.getMessage());
                 logger.error("Error al obtener el token del jugador: " + ex.getMessage());
             } catch (NamingException ex) {
+                Alerts.Error("Error al obtener la instancia del EJB: " + ex.getMessage());
                 logger.error("Error al obtener la instancia del EJB: " + ex.getMessage());
             }
 
@@ -232,6 +235,7 @@ public class InGameController implements Initializable {
                 numeroPregunta += 1;
 
             } catch (Exception ex) {
+                Alerts.Error("Error al obtener nueva pregunta: " + ex.getMessage());
                 logger.error("Error al obtener nueva pregunta: " + ex.getMessage());
             }
         }
