@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="824.0" prefWidth="1163.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentacion.InGameController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentacion.InGameController">
    <children>
       <SplitPane dividerPositions="0.7364341085271318" prefHeight="824.0" prefWidth="1163.0">
         <items>
@@ -30,11 +30,7 @@
                         </Pane>
                         <Pane prefHeight="300.0" prefWidth="850.0" style="-fx-border-color: black;">
                            <children>
-                              <Label fx:id="Pregunta_Label" layoutX="366.0" layoutY="124.0" text="Pregunta">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
+                              <TextArea fx:id="Pregunta_TextArea" layoutX="9.0" prefHeight="293.0" prefWidth="834.0" />
                            </children></Pane>
                         <Pane fx:id="RespuestaA_Pane" onMouseClicked="#onMouseClicked_RespuestaA_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
                            <children>
