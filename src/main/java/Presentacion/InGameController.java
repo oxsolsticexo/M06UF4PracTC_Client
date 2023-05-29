@@ -5,6 +5,7 @@
 package Presentacion;
 
 import Entities.Pregunta;
+import Logica.Exceptions.SesionException;
 import Logica.Exceptions.SesionJugException;
 import Logica.Interfaces.IPartida;
 import Main.WindowsManager;
@@ -180,7 +181,7 @@ public class InGameController implements Initializable {
             try {
                 //Llevamos el token al servidor junto a los datos de la partida
                 iPartida.persistirDatosPartida(LoginController.token, puntuacionJugador);
-            } catch (SesionJugException ex) {
+            } catch (SesionException ex) {
                 logger.error("Error al obtener el token del jugador: " + ex.getMessage());
             } catch (NamingException ex) {
                 logger.error("Error al obtener la instancia del EJB: " + ex.getMessage());
