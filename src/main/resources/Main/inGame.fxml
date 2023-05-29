@@ -9,138 +9,153 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentacion.InGameController">
-   <children>
-      <SplitPane dividerPositions="0.7364341085271318" prefHeight="824.0" prefWidth="1163.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="817.0" prefWidth="842.0">
-               <children>
-                  <VBox prefHeight="822.0" prefWidth="851.0">
-                     <children>
-                        <Pane prefHeight="123.0" prefWidth="851.0" style="-fx-border-color: black;">
-                           <children>
-                              <Label fx:id="PreguntaCounter_Label" layoutX="327.0" layoutY="34.0" prefHeight="49.0" prefWidth="197.0" text="Pregunta 1/10" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font></Label>
-                              <Label fx:id="Timer_Label" layoutX="14.0" layoutY="41.0" prefHeight="36.0" prefWidth="98.0" text="Timer:">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font></Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="300.0" prefWidth="850.0" style="-fx-border-color: black;">
-                           <children>
-                              <TextArea fx:id="Pregunta_TextArea" layoutX="9.0" prefHeight="293.0" prefWidth="834.0" />
-                           </children></Pane>
-                        <Pane fx:id="RespuestaA_Pane" onMouseClicked="#onMouseClicked_RespuestaA_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
-                           <children>
-                              <Label fx:id="RespuestaA_Label" layoutX="344.0" layoutY="47.0" text="Respuesta A">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
-                        <Pane fx:id="RespuestaB_Pane" onMouseClicked="#onMouseClicked_RespuestaB_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
-                           <children>
-                              <Label fx:id="RespuestaB_Label" layoutX="344.0" layoutY="47.0" text="Respuesta B">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
-                        <Pane fx:id="RespuestaC_Pane" onMouseClicked="#onMouseClicked_RespuestaC_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
-                           <children>
-                              <Label fx:id="RespuestaC_Label" layoutX="344.0" layoutY="47.0" text="Respuesta C">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <VBox layoutY="-1.0" prefHeight="824.0" prefWidth="302.0" style="-fx-border-color: black;">
-                     <children>
-                        <Pane prefHeight="117.0" prefWidth="300.0" style="-fx-border-color: black;">
-                           <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Jugador:">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="NombreJugador_Label" layoutX="12.0" layoutY="59.0" prefHeight="45.0" prefWidth="281.0" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="141.0" prefWidth="300.0">
-                           <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Acertadas:">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="Acertadas_Label" layoutX="7.0" layoutY="71.0" prefHeight="45.0" prefWidth="287.0" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
-                        <Pane prefHeight="141.0" prefWidth="300.0">
-                           <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Fallidas:">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="Fallidas_Label" layoutX="9.0" layoutY="71.0" prefHeight="45.0" prefWidth="287.0" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
-                        <Pane prefHeight="141.0" prefWidth="300.0">
-                           <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Puntuación partida :">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="PuntuacionPartida_Label" layoutX="9.0" layoutY="71.0" prefHeight="45.0" prefWidth="287.0" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
-                        <Pane prefHeight="141.0" prefWidth="300.0">
-                           <children>
-                              <Label layoutX="14.0" layoutY="14.0" text="Puntuacion Total:">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="PuntuacionTotal_Label" layoutX="6.0" layoutY="59.0" prefHeight="45.0" prefWidth="287.0" textAlignment="CENTER">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                              </Label>
-                           </children></Pane>
-                        <Pane prefHeight="141.0" prefWidth="300.0" style="-fx-border-color: black;">
-                           <children>
-                              <Button fx:id="Comenzar_Button" layoutX="179.0" layoutY="53.0" mnemonicParsing="false" onAction="#onAction_Comenzar_Button" text="Comenzar" />
-                              <Button fx:id="Abandonar_Button" layoutX="39.0" layoutY="53.0" mnemonicParsing="false" onAction="#onAction_Abandonar_Button" text="Abandonar" />
-                           </children>
-                        </Pane>
-                     </children></VBox>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-      <PerspectiveCamera />
-   </children>
+    <children>
+        <SplitPane dividerPositions="0.7364341085271318" prefHeight="824.0" prefWidth="1163.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="817.0" prefWidth="842.0">
+                    <children>
+                        <VBox prefHeight="822.0" prefWidth="851.0">
+                            <children>
+                                <Pane prefHeight="123.0" prefWidth="851.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label fx:id="PreguntaCounter_Label" layoutX="327.0" layoutY="34.0" prefHeight="49.0" prefWidth="197.0" text="Pregunta 1/10" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="24.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="Timer_Label" layoutX="14.0" layoutY="41.0" prefHeight="36.0" prefWidth="98.0" text="Timer:">
+                                            <font>
+                                                <Font size="24.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="300.0" prefWidth="850.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <TextArea fx:id="Pregunta_TextArea" layoutX="9.0" prefHeight="293.0" prefWidth="834.0">
+                                            <font>
+                                                <Font size="22.0" />
+                                            </font>
+                                        </TextArea>
+                                    </children>
+                                </Pane>
+                                <Pane fx:id="RespuestaA_Pane" onMouseClicked="#onMouseClicked_RespuestaA_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label fx:id="RespuestaA_Label" layoutX="344.0" layoutY="47.0" text="Respuesta A">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane fx:id="RespuestaB_Pane" onMouseClicked="#onMouseClicked_RespuestaB_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label fx:id="RespuestaB_Label" layoutX="344.0" layoutY="47.0" text="Respuesta B">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane fx:id="RespuestaC_Pane" onMouseClicked="#onMouseClicked_RespuestaC_Pane" prefHeight="145.0" prefWidth="851.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label fx:id="RespuestaC_Label" layoutX="344.0" layoutY="47.0" text="Respuesta C">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <VBox layoutY="-1.0" prefHeight="824.0" prefWidth="302.0" style="-fx-border-color: black;">
+                            <children>
+                                <Pane prefHeight="117.0" prefWidth="300.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Label layoutX="14.0" layoutY="14.0" text="Jugador:">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="NombreJugador_Label" layoutX="12.0" layoutY="59.0" prefHeight="45.0" prefWidth="281.0" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="141.0" prefWidth="300.0">
+                                    <children>
+                                        <Label layoutX="14.0" layoutY="14.0" text="Acertadas:">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="Acertadas_Label" layoutX="7.0" layoutY="71.0" prefHeight="45.0" prefWidth="287.0" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="141.0" prefWidth="300.0">
+                                    <children>
+                                        <Label layoutX="14.0" layoutY="14.0" text="Fallidas:">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="Fallidas_Label" layoutX="9.0" layoutY="71.0" prefHeight="45.0" prefWidth="287.0" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="141.0" prefWidth="300.0">
+                                    <children>
+                                        <Label layoutX="14.0" layoutY="14.0" text="Puntuación partida :">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="PuntuacionPartida_Label" layoutX="9.0" layoutY="71.0" prefHeight="45.0" prefWidth="287.0" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="141.0" prefWidth="300.0">
+                                    <children>
+                                        <Label layoutX="14.0" layoutY="14.0" text="Puntuacion Total:">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="PuntuacionTotal_Label" layoutX="6.0" layoutY="59.0" prefHeight="45.0" prefWidth="287.0" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="30.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <Pane prefHeight="141.0" prefWidth="300.0" style="-fx-border-color: black;">
+                                    <children>
+                                        <Button fx:id="Comenzar_Button" layoutX="179.0" layoutY="53.0" mnemonicParsing="false" onAction="#onAction_Comenzar_Button" text="Comenzar" />
+                                        <Button fx:id="Abandonar_Button" layoutX="39.0" layoutY="53.0" mnemonicParsing="false" onAction="#onAction_Abandonar_Button" text="Abandonar" />
+                                    </children>
+                                </Pane>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+        <PerspectiveCamera />
+    </children>
 </AnchorPane>

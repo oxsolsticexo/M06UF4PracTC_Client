@@ -117,7 +117,7 @@ public class WindowsManager {
             Stage stage = new Stage();
             stage.setTitle("[Trivial] Juego");
             stage.getIcons().add(new Image("/images/Trivial.png"));
-            stage.setScene(new Scene(root, 800, 600));
+            stage.setScene(new Scene(root, 1163, 824));
             stage.setResizable(false);
             oldWindow.close();
             stage.show();
