@@ -4,8 +4,6 @@ import Entities.Lookups;
 import Logica.Exceptions.SesionException;
 import Logica.Interfaces.IPartida;
 import Logica.Interfaces.ISessionManager;
-import Logica.Logica;
-
 import Main.WindowsManager;
 import java.io.IOException;
 import java.net.URL;

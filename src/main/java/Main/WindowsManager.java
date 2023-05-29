@@ -27,7 +27,6 @@ public class WindowsManager {
         }
 
         return manager;
-
     }
 
     public void hallOfFame(Button backButton) {
@@ -45,7 +44,23 @@ public class WindowsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void returnToMain(Button backButton) {
+        try {
+            Stage oldWindow = (Stage) backButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("pantallaMain.fxml"));
+
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("/images/Trivial.png"));
+            stage.setTitle("[Trivial] Menú Principal");
+            stage.setScene(new Scene(root, 600, 400));
+            oldWindow.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void login() {
@@ -61,7 +76,6 @@ public class WindowsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void disconnect(Button discon) {
@@ -79,7 +93,6 @@ public class WindowsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void createNewGame(Button createGame) {
@@ -96,7 +109,6 @@ public class WindowsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void startGame(Button createButton) {
@@ -105,9 +117,10 @@ public class WindowsManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("inGame.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle("[Trivial]");
+            stage.setTitle("[Trivial] Juego");
             stage.getIcons().add(new Image("/images/Trivial.png"));
-            stage.setScene(new Scene(root, 600, 400));
+            stage.setScene(new Scene(root, 1163, 824));
+            stage.setResizable(false);
             oldWindow.close();
             stage.show();
         } catch (IOException e) {
