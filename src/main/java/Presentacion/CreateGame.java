@@ -1,7 +1,7 @@
 package Presentacion;
 
 import Entities.Lookups;
-import Logica.Exceptions.SesionJugException;
+import Logica.Exceptions.SesionException;
 import Logica.Interfaces.IPartida;
 import Logica.Interfaces.ISessionManager;
 import Logica.Logica;
@@ -92,14 +92,14 @@ public class CreateGame implements Initializable {
     }
 
     @FXML
-    void startGame(ActionEvent event) {
+    void startGame(ActionEvent event) throws SesionException {
 
         try {
             //Llamar a EJB
             partida.crearPartida(newGameInputText.getText(), LoginController.token, dificultChoiceBox.getValue());
 
             manager.startGame(createButton);
-        } catch (NamingException | ParsingException | IOException | SesionJugException ex) {
+        } catch (NamingException | ParsingException | IOException | SesionException ex) {
             Logger.getLogger(CreateGame.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }

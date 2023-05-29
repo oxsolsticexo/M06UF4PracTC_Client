@@ -63,7 +63,6 @@ public class LoginController {
 
         System.out.println("el correo es : " + mailLogin);
         //en caso de tener un token para el cliente accedemos a la siguiente pantalla "pantallaMain"
-
     }
 
     @FXML
