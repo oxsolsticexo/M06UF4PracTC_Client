@@ -26,7 +26,7 @@ public class PantallaMainController {
     private Button halfOfFameBut;
 
     @FXML
-    void cambiarGenerarPartida(ActionEvent event) {
+    void cambiarGenerarPartida(ActionEvent event) throws Exception {
         wm.createNewGame(generarPartBut);
     }
 

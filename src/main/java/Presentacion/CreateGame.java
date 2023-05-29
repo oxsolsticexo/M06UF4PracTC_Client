@@ -1,6 +1,7 @@
 package Presentacion;
 
 import Entities.Lookups;
+import Logica.Alerts.Alerts;
 import Logica.Exceptions.SesionJugException;
 import Logica.Interfaces.IPartida;
 import Logica.Interfaces.ISessionManager;
@@ -92,16 +93,22 @@ public class CreateGame implements Initializable {
     }
 
     @FXML
-    void startGame(ActionEvent event) {
+    void startGame(ActionEvent event) throws NamingException {
 
         try {
             //Llamar a EJB
             partida.crearPartida(newGameInputText.getText(), LoginController.token, dificultChoiceBox.getValue());
-
+            
             manager.startGame(createButton);
-        } catch (NamingException | ParsingException | IOException | SesionJugException ex) {
-            Logger.getLogger(CreateGame.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+        }catch (NullPointerException e) {
+            System.out.println("Estoy Nulo");
+            throw e;
+        } catch (Exception e) {
+            partida = Lookups.partidaEJBRemoteLookup();
+            Alerts.Warning(e.getMessage());
+        }finally{
+            newGameInputText.requestFocus();
+            dificultChoiceBox.requestFocus();
         }
 
     }
