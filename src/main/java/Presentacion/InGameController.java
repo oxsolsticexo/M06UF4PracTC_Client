@@ -161,14 +161,14 @@ public class InGameController implements Initializable {
         try {
 
             //Obtenemos los marcadores del jugador            
-            NombreJugador_Label.setText(iPartida.getNickJugador(LoginController.token));
-            PuntuacionTotal_Label.setText(String.valueOf(iPartida.getPuntuacionJugador(LoginController.token)));
-            
-        } catch (SesionException ex) {
-            logger.error("Error al obtener el token del jugador: " + ex.getMessage());
-        } catch (NamingException ex) {
-            logger.error("Error al obtener la instancia del EJB: " + ex.getMessage());
-        }
+//            NombreJugador_Label.setText(iPartida.getNickJugador(LoginController.token));
+//            PuntuacionTotal_Label.setText(String.valueOf(iPartida.getPuntuacionJugador(LoginController.token)));
+//            
+//        } catch (SesionException ex) {
+//            logger.error("Error al obtener el token del jugador: " + ex.getMessage());
+//        } catch (NamingException ex) {
+//            logger.error("Error al obtener la instancia del EJB: " + ex.getMessage());
+//        }
 
         //Empezamos el timer y seteamos el valor del Timer en cada segundo.
         iPartida.iniciarTiempo();

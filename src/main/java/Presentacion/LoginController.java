@@ -4,6 +4,8 @@ import Entities.Lookups;
 import Entities.Token;
 import Logica.Interfaces.ISessionManager;
 import Main.WindowsManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -66,28 +68,32 @@ public class LoginController {
     }
 
     @FXML
-    void registroToPantallaMain(ActionEvent event) throws NamingException {
-        //instanciamos el session manager ejb del archivo Lookups
-        sm = Lookups.sessionManagerEJBRemoteLookup();
-        //obtenemos el valor del registro 
-        String usuario = userRegistro.getText();
-        String correo = emailRegistro.getText();
-        //validamos los datos introducidos por el usuario
-        if (validarCorreo(correo) && validarNickname(usuario)) {
-            //comprobamos que los usuarios no sean nulos
-            if (usuario != null && emailRegistro != null) {
-                token = sm.registrarJugador(userRegistro.getText(), emailRegistro.getText());
-                //en caso de que el token no sea nulo avanzamos al usuario a la siguiente pantalla
-                //ya que se habrá generado una sesión y el jugador se encuentra en la BD
-                if (token != null) {
-                    validationLabel.setText(" ");
-                    wm.mainMenu(botonRegistrar);
-                } else {
-                    validationLabel.setText("Error en la consulta");
+    void registroToPantallaMain(ActionEvent event) {
+        try {
+            //instanciamos el session manager ejb del archivo Lookups
+            sm = Lookups.sessionManagerEJBRemoteLookup();
+            //obtenemos el valor del registro
+            String usuario = userRegistro.getText();
+            String correo = emailRegistro.getText();
+            //validamos los datos introducidos por el usuario
+            if (validarCorreo(correo) && validarNickname(usuario)) {
+                //comprobamos que los usuarios no sean nulos
+                if (usuario != null && emailRegistro != null) {
+                    token = sm.registrarJugador(userRegistro.getText(), emailRegistro.getText());
+                    //en caso de que el token no sea nulo avanzamos al usuario a la siguiente pantalla
+                    //ya que se habrá generado una sesión y el jugador se encuentra en la BD
+                    if (token != null) {
+                        validationLabel.setText(" ");
+                        wm.mainMenu(botonRegistrar);
+                    } else {
+                        validationLabel.setText("Error en la consulta");
+                    }
                 }
+            } else {
+                validationLabel.setText("El nickname o email no es válido");
             }
-        } else {
-            validationLabel.setText("El nickname o email no es válido");
+        } catch (NamingException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
